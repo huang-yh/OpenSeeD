@@ -43,7 +43,8 @@ def main(args=None):
     # META DATA
     pretrained_pth = os.path.join(opt['WEIGHT'])
     output_root = './output'
-    image_pth = 'images/street.jpg'
+    # image_pth = 'images/street.jpg'
+    image_pth = opt['image_path']
 
     model = BaseModel(opt, build_model(opt)).from_pretrained(pretrained_pth).eval().cuda()
 
@@ -86,6 +87,7 @@ def main(args=None):
 
         pano_seg = outputs[-1]['panoptic_seg'][0]
         pano_seg_info = outputs[-1]['panoptic_seg'][1]
+        import pdb; pdb.set_trace()
 
         for i in range(len(pano_seg_info)):
             if pano_seg_info[i]['category_id'] in metadata.thing_dataset_id_to_contiguous_id.keys():

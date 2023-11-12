@@ -43,7 +43,8 @@ def main(args=None):
     # META DATA
     pretrained_pth = os.path.join(opt['WEIGHT'])
     output_root = './output'
-    image_pth = 'images/animals.png'
+    # image_pth = 'images/animals.png'
+    image_pth = opt['image_path']
 
     model = BaseModel(opt, build_model(opt)).from_pretrained(pretrained_pth).eval().cuda()
 
@@ -51,7 +52,15 @@ def main(args=None):
     t.append(transforms.Resize(512, interpolation=Image.BICUBIC))
     transform = transforms.Compose(t)
 
-    stuff_classes = ['zebra','antelope','giraffe','ostrich','sky','water','grass','sand','tree']
+    # stuff_classes = ['zebra','antelope','giraffe','ostrich','sky','water','grass','sand','tree']
+    stuff_classes = ['barrier', 'bicycle', 'bus', 'car', 'construction_vehicle',
+         'motorcycle', 'pedestrian', 'traffic_cone', 'trailer', 'truck',
+         'driveable_surface', 'other_flat', 'sidewalk', 'terrain', 'manmade',
+         'vegetation']
+    stuff_classes = ['barrier', 'bicycle', 'bus', 'car', 'construction_vehicle',
+         'motorcycle', 'person', 'traffic_cone', 'trailer', 'truck',
+         'road', 'other_flat', 'sidewalk', 'terrain', 'building',
+         'tree', 'sky', "wall", "fence", "pole"]
     stuff_colors = [random_color(rgb=True, maximum=255).astype(np.int).tolist() for _ in range(len(stuff_classes))]
     stuff_dataset_id_to_contiguous_id = {x:x for x in range(len(stuff_classes))}
 

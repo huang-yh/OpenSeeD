@@ -88,6 +88,8 @@ lib/pycocotools/_mask.c
 lib/nms/cpu_nms.c
 
 OUTPUT
+OUTPUT*
+output*
 OUTPUT/*
 models/*
 DATASET
@@ -107,3 +109,5 @@ plot/
 *venv/*
 *.pt
 *.pth
+
+data
